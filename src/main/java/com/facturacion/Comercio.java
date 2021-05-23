@@ -31,6 +31,14 @@ public class Comercio {
 
 	}
 
+	/**
+	 *
+	 * @param id     El identificador del producto
+	 * @param name   El nombre del producto
+	 * @param precio El precio del producto
+	 * @param cant   La cantidad de productos que se quiere registrar
+	 * @return Un string que indica si el producto ha sido añadido o ya existe
+	 */
 	public String registerProduct(int id, String name, float precio, int cant) {// Se registra nuevo producto con int
 		// id,String name, int precio, int cant
 		if (!almacen.encontrarProduct(id)) {
