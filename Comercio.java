@@ -18,11 +18,11 @@ List<Factura> ListaFacturas = new ArrayList<>();
 List<Pedido> ListaPedidos = new ArrayList<>();
 //-----------------------------------------Metodos-------------------------------------------------------
 	public String nuevoClient(String name, String surname, String dni, int telefono) {//Se registra nuevo cliente con String name, String surname, String dni, int telefono.
-		if(!listausuarios.containsKey(dni)) {
-			listausuarios.put(dni,new Usuario(name,surname,dni,telefono));
-			return "Usuario Añadido";
+		if(listausuarios.containsKey(dni)) {
+			return "Ya existe ese usuario";
 		}
-		return "Ya existe ese usuario";
+		listausuarios.put(dni,new Usuario(name,surname,dni,telefono));
+		return "Usuario Añadido";
 	}
 	public String registerProduct(int id,String name, float precio, int cant) {//Se registra nuevo producto con int id,String name, int precio, int cant
 		if(!almacen.encontrarProduct(id)) {
