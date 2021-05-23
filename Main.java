@@ -9,10 +9,10 @@ public class Main {
 		do {
 			System.out.println("+-----------------------------------------------+");
 			System.out.println("|*1*Registrar un cliente                        |");
-			System.out.println("|*2*Incorporaci髇 de nuevos productos al almac閚|");
-			System.out.println("|*3*Reposici髇 de existencia de productos       |");
-			System.out.println("|*4*Generaci髇 de pedidos                       |");
-			System.out.println("|*5*Generaci髇 de factura                       |");
+			System.out.println("|*2*Incorporaci贸n de nuevos productos al almac茅n|");
+			System.out.println("|*3*Reposici贸n de existencia de productos       |");
+			System.out.println("|*4*Generaci贸n de pedidos                       |");
+			System.out.println("|*5*Generaci贸n de factura                       |");
 			System.out.println("|*6*Visualizar por pantalla una factura         |");
 			System.out.println("|*7*Visualizar las facturas de un cliente       |");
 			System.out.println("|*8*Guardar una factura en un archivo           |");
@@ -32,7 +32,7 @@ public class Main {
 				System.out.println(tienda.nuevoClient(Nombre, Apellidos, DNI, telefono));
 				break;
 			case 2:
-				System.out.println("|*2*Incorporaci髇 de nuevos productos al almac閚|");
+				System.out.println("|*2*Incorporaci贸n de nuevos productos al almac茅n|");
 				System.out.println("Introduce el identificador del producto");
 				int idProducto = entradanumeros.nextInt();
 				System.out.println("Introduce el nombre");
@@ -44,15 +44,15 @@ public class Main {
 				System.out.println(tienda.registerProduct(idProducto, nombreProducto, precio, cantidadProducto));
 				break;
 			case 3:
-				System.out.println("|*3*Reposici髇 de existencia de productos       |");
+				System.out.println("|*3*Reposici贸n de existencia de productos       |");
 				System.out.println("Introduce el identificador");
 				int idProduct = entradanumeros.nextInt();
 				System.out.println("Introduce cantidad de producto");
 				int cantidadad = entradanumeros.nextInt();
-				System.out.println(tienda.a馻dirProduct(idProduct, cantidadad));
+				System.out.println(tienda.a帽adirProduct(idProduct, cantidadad));
 				break;
 			case 4:
-				System.out.println("|*4*Generaci髇 de pedidos                       |");
+				System.out.println("|*4*Generaci贸n de pedidos                       |");
 				System.out.println("Introduce el dni");
 				String dniCliente = entradatexto.nextLine();
 				System.out.println(tienda.verProductos());
@@ -60,10 +60,10 @@ public class Main {
 				int idProductSelecionado = entradanumeros.nextInt();
 				System.out.println("Introduce la cantidad del producto que comprar");
 				int cantidadProductSelecionado = entradanumeros.nextInt();
-				System.out.println(tienda.a馻dirPedido(dniCliente,idProductSelecionado,cantidadProductSelecionado));//String dni,int idProducto ,int cantidad
+				System.out.println(tienda.a帽adirPedido(dniCliente,idProductSelecionado,cantidadProductSelecionado));//String dni,int idProducto ,int cantidad
 				break;
 			case 5:
-				System.out.println("|*5*Generaci髇 de factura                       |");
+				System.out.println("|*5*Generaci贸n de factura                       |");
 				System.out.println("introduce dni");
 				String dniClienteC = entradatexto.nextLine();
 				System.out.println(tienda.pasarPedidoAFactura(dniClienteC));

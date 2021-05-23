@@ -20,32 +20,32 @@ List<Pedido> ListaPedidos = new ArrayList<>();
 	public String nuevoClient(String name, String surname, String dni, int telefono) {//Se registra nuevo cliente con String name, String surname, String dni, int telefono.
 		if(!listausuarios.containsKey(dni)) {
 			listausuarios.put(dni,new Usuario(name,surname,dni,telefono));
-			return "Usuario Añadido";
+			return "Usuario AÃ±adido";
 		}
 		return "Ya existe ese usuario";
 	}
 	public String registerProduct(int id,String name, float precio, int cant) {//Se registra nuevo producto con int id,String name, int precio, int cant
 		if(!almacen.encontrarProduct(id)) {
 			almacen.registerNewProduct(name, id, precio, cant);
-			return "Producto Añadido";
+			return "Producto AÃ±adido";
 		}
 		return "Ya existe ese producto";
 	}
-	public String añadirProduct(int id, int cant) {//Se añaden producto con int id, int cant
+	public String aÃ±adirProduct(int id, int cant) {//Se aÃ±aden producto con int id, int cant
 		if(almacen.encontrarProduct(id)) {
 			almacen.addcantProduct(id, cant);
-			return "Cantidad de producto añadida";
+			return "Cantidad de producto aÃ±adida";
 		}
 		return "Producto no existe";
 	}
-	public String añadirPedido(String dni,int idProducto ,int cantidad){//Se ve si existe usuario y si existe añade un pedido String dni,int idProducto ,int cantidad
+	public String aÃ±adirPedido(String dni,int idProducto ,int cantidad){//Se ve si existe usuario y si existe aÃ±ade un pedido String dni,int idProducto ,int cantidad
 		float precio = verPrecio(idProducto);
 		int idLista = ListaPedidos.size();
 		if((listausuarios.containsKey(dni))&&(almacen.hayCantidad(idProducto,cantidad))) {
 				ListaPedidos.add( new Pedido(idLista,dni,idProducto,cantidad,precio,false));
-				return "Pedido Añadido";	
+				return "Pedido AÃ±adido";	
 		}
-		return "No se ha podido añadir";
+		return "No se ha podido aÃ±adir";
 	}
 	public String pasarPedidoAFactura(String dni) {//Se sacan los pedidos por dni y se almacenan a ListaFactura
 		for (Pedido Unpedido  : ListaPedidos) {//int idFactura, String dni, String estadoPago,float subtotal, float precio,float cantidad
@@ -79,7 +79,7 @@ List<Pedido> ListaPedidos = new ArrayList<>();
 		if(listausuarios.containsKey(dni)) {
 			for (Factura UnaFactura : ListaFacturas) {
 			    if (UnaFactura.getDni().equals(dni)) {
-				return  "Nº->"+UnaFactura.getIdFactura();
+				return  "NÂº->"+UnaFactura.getIdFactura();
 			    }
 			}
 		}
