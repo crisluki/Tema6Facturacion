@@ -65,6 +65,12 @@ public class Pedido implements List<Producto> {
 	public void setIdProducto(int idProducto) {
 		this.idProducto = idProducto;
 	}
+	
+	@Override
+	public String toString() {
+		return "Pedido [nombre=" + nombre + ", precio=" + precio + ", cantidad=" + cantidad + ", dni=" + dni
+				+ ", idLista=" + idLista + ", idProducto=" + idProducto + ", terminado=" + terminado + "]";
+	}
 	@Override
 	public boolean add(Producto arg0) {
 		// TODO Auto-generated method stub

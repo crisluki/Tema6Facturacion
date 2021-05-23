@@ -16,7 +16,7 @@ public class Factura {
 		this.idFactura = idFactura;
 		this.dni = dni;
 		this.estadoPago = estadoPago;
-		Subtotal = ((precio*cantidad)*Descuento-(precio*cantidad))*iva;
+		Subtotal = (precio*cantidad)+((precio*cantidad)*Descuento);
 		this.precio = precio;
 		this.cantidad = cantidad;
 	}
@@ -84,5 +84,11 @@ public class Factura {
 	public void setIva(float iva) {
 		this.iva = iva;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Factura [idFactura=" + idFactura + ", dni=" + dni + ", estadoPago=" + estadoPago + ", Descuento="
+				+ Descuento + ", Subtotal=" + Subtotal + ", precio=" + precio + ", cantidad=" + cantidad + ", iva="
+				+ iva + "]";
+	}
 }

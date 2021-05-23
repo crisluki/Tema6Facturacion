@@ -58,22 +58,22 @@ List<Pedido> ListaPedidos = new ArrayList<>();
 		return "No se encontro pedidos asociados al DNI";
 	}
 	public String mostrarFactura(int idFactura) {//Se una Factura por idFactura
-		if(existFactura(idFactura)){
-			return  "+-----------------------------------------------------------------------------+\n"+
-					"|                                                                             |\n"+
-					mostrarDATOSFacturaUsuario(idFactura)+"\n"+
-					"|Factura:"+mostrarFacturaUsuario(idFactura)+"\n"+
-					"|                                                                             |\n"+
-					"| Producto          Unidades       Precio        Descuento      Subtotal      |\n"+
-					"|-----------------------------------------------------------------------------|\n"+
-					listarPedidos(idFactura)+"\n"+
-					"|                                                                             |\n"+
-					buscarEnFactura(idFactura)+"\n"+
-					"|                                                                             |\n"+
-					"+-----------------------------------------------------------------------------+\n";
-					
+		if(!existFactura(idFactura)){
+			return "Not found";
 		}
-		return "Not found";
+		return  "+-----------------------------------------------------------------------------+\n"+
+		"|                                                                             |\n"+
+		mostrarDATOSFacturaUsuario(idFactura)+"\n"+
+		"|Factura:"+mostrarFacturaUsuario(idFactura)+"\n"+
+		"|                                                                             |\n"+
+		"| Producto          Unidades       Precio        Descuento      Subtotal      |\n"+
+		"|-----------------------------------------------------------------------------|\n"+
+		listarPedidos(idFactura)+"\n"+
+		"|                                                                             |\n"+
+		buscarEnFactura(idFactura)+"\n"+
+		"|                                                                             |\n"+
+		"+-----------------------------------------------------------------------------+\n";
+	
 	}
 	public String mostrarHistorial(String dni) {//Se sacan los id de Facturas que coincidan por dni.
 		if(listausuarios.containsKey(dni)) {
@@ -134,24 +134,23 @@ List<Pedido> ListaPedidos = new ArrayList<>();
 	public String verNombre(int idProducto) {
 		return almacen.verNombre(idProducto);
 	}
-	public String listarPerdidos(String dni) {
+	public String BuscarNombrePerdido(float cantidad,float descuento,String dni,int id ) {
 		String cadena= "";
 		for (Pedido UnPedido  : ListaPedidos) {
-		    if (UnPedido.getDni()==dni) {
-		    	cadena=cadena+ "| "+almacen.verNombre(UnPedido.getIdProducto())+"          "+UnPedido.getCantidad()+"          "+UnPedido.getPrecio()+"          "+"\n";
+		    if (UnPedido.getDni().equals(dni)) {
+		    	cadena=cadena+ "| "+almacen.verNombre(UnPedido.getIdProducto())+"               "+UnPedido.getCantidad()+"            "+UnPedido.getPrecio()+"                 "+descuento+"                    |\n";
 		    }
 		}
 		return cadena;
 	}
 	public String listarPedidos(int id) {
-		String acac= "";
 		for (Factura UnaFactura : ListaFacturas) {
 		    if (UnaFactura.getIdFactura()==id) {
-		    	System.out.println(UnaFactura.getDni());
-		    	acac=acac+ listarPerdidos(UnaFactura.getDni())+"\n";
+		    	
+		    	return BuscarNombrePerdido(UnaFactura.getCantidad(),UnaFactura.getDescuento(),UnaFactura.getDni(),id);
 		    }
 		}
-		return acac;
+		return null;
 	}
 	public String mostrarFacturaUsuario(int id) {
 		for (Factura UnaFactura : ListaFacturas) {
@@ -173,9 +172,9 @@ List<Pedido> ListaPedidos = new ArrayList<>();
 		String cadena = " ";
 		for (Factura UnaFactura : ListaFacturas) {
 		    if (UnaFactura.getIdFactura()==id) {
-		        return  "| Subtotal                                                     "+UnaFactura.getSubtotal()+"      |\n"+
-					    "| IVA 21%                                                      "+UnaFactura.getIva()+"%"+"       |\n"+
-						"| Total                                                        "+UnaFactura.getSubtotal()*UnaFactura.getIva()+UnaFactura.getPrecio()+"  |";
+		        return  "| Subtotal                                                        "+UnaFactura.getSubtotal()+"      |\n"+
+					    "| IVA 21%                                                         "+UnaFactura.getIva()+"%"+"       |\n"+
+						"| Total                                                           "+UnaFactura.getSubtotal()*UnaFactura.getIva()+"      |";
 		    }
 		}
 		return cadena;
