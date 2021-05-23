@@ -1,4 +1,4 @@
-package Tema6Facturacion;
+package com.facturacion;
 
 public class Factura {
 	private int idFactura;
@@ -87,6 +87,7 @@ public class Factura {
 	@Override
 	public String toString() {
 		return "Factura [idFactura=" + idFactura + ", dni=" + dni + ", estadoPago=" + estadoPago + ", Descuento="
-				+ Descuento + ", Subtotal=" + Subtotal + ", precio=" + precio + ", cantidad=" + cantidad + ", iva=" + iva + "]";
+				+ Descuento + ", Subtotal=" + Subtotal + ", precio=" + precio + ", cantidad=" + cantidad + ", iva="
+				+ iva + "]";
 	}
 }

@@ -1,4 +1,4 @@
-package Tema6Facturacion;
+package com.facturacion;
 
 import java.util.ArrayList;
 import java.util.List;
