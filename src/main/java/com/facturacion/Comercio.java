@@ -111,10 +111,8 @@ public class Comercio {
 		// un
 		// atributo.
 		for (Pedido pedido : listaPedidos) {
-			if (pedido.getDni().equals(dni)) {
-				if (!pedido.getTerminado()) {
-					return "PENDIENTE DE PAGO";
-				}
+			if (pedido.getDni().equals(dni) && !pedido.getTerminado()) {
+				return "PENDIENTE DE PAGO";
 			}
 		}
 		return "PAGADO";
@@ -203,7 +201,7 @@ public class Comercio {
 	public String mostrarDATOSFacturaUsuario(int id) {
 		for (Factura UnaFactura : listaFacturas) {
 			if (UnaFactura.getIdFactura() == id) {
-				return "|" + listausuarios.get(UnaFactura.getDni());
+				return "|" + listausuarios.get(UnaFactura.getDni()).toString();
 			}
 		}
 		return null;

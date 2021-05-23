@@ -4,8 +4,8 @@ public class Factura {
 	private int idFactura;
 	private String dni;
 	private String estadoPago;
-	private float Descuento = (float) 0.10;
-	private float Subtotal;
+	private float descuento = (float) 0.10;
+	private float subtotal;
 	private float precio;
 	private float cantidad;
 	private float iva = (float) 1.21;
@@ -15,7 +15,7 @@ public class Factura {
 		this.idFactura = idFactura;
 		this.dni = dni;
 		this.estadoPago = estadoPago;
-		Subtotal = (precio * cantidad) + ((precio * cantidad) * Descuento);
+		this.subtotal = (precio * cantidad) + ((precio * cantidad) * descuento);
 		this.precio = precio;
 		this.cantidad = cantidad;
 	}
@@ -33,11 +33,11 @@ public class Factura {
 	}
 
 	public float getDescuento() {
-		return Descuento;
+		return descuento;
 	}
 
 	public float getSubtotal() {
-		return Subtotal;
+		return subtotal;
 	}
 
 	public float getPrecio() {
@@ -65,11 +65,11 @@ public class Factura {
 	}
 
 	public void setDescuento(float descuento) {
-		Descuento = descuento;
+		this.descuento = descuento;
 	}
 
 	public void setSubtotal(float subtotal) {
-		Subtotal = subtotal;
+		this.subtotal = subtotal;
 	}
 
 	public void setPrecio(float precio) {
@@ -86,8 +86,7 @@ public class Factura {
 
 	@Override
 	public String toString() {
-		return "Factura [idFactura=" + idFactura + ", dni=" + dni + ", estadoPago=" + estadoPago + ", Descuento="
-				+ Descuento + ", Subtotal=" + Subtotal + ", precio=" + precio + ", cantidad=" + cantidad + ", iva="
-				+ iva + "]";
+		return "Factura [idFactura=" + idFactura + ", dni=" + dni + ", estadoPago=" + estadoPago + ", descuento="
+				+ descuento + ", subtotal=" + subtotal + ", precio=" + precio + ", cantidad=" + cantidad + ", iva=" + iva + "]";
 	}
 }

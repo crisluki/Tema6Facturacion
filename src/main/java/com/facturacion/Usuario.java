@@ -45,5 +45,6 @@ public class Usuario {
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
+	// TODO: Añadir to string
 
 }

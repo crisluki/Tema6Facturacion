@@ -64,10 +64,6 @@ public class Main {
 					System.out.println("Introduce la cantidad del producto que comprar");
 					int cantidadProductSelecionado = entradanumeros.nextInt();
 					System.out.println(tienda.añadirPedido(dniCliente, idProductSelecionado, cantidadProductSelecionado));// String
-					// dni,int
-					// idProducto
-					// ,int
-					// cantidad
 					break;
 				case 5:
 					System.out.println("|*5*Generación de factura                       |");
