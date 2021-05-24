@@ -13,32 +13,57 @@ Calendar fecha = new GregorianCalendar();
 public Comercio() {
 }
 //-----------------------------------------Listas--------------------------------------------------------
-Map<String, List<Usuario>>listausuarios = new HashMap<String, List<Usuario>>();
+Map<String, Usuario>listausuarios = new HashMap<>();
 List<Factura> ListaFacturas = new ArrayList<>();
 List<Pedido> ListaPedidos = new ArrayList<>();
 //-----------------------------------------Metodos-------------------------------------------------------
-	public String nuevoClient(String name, String surname, String dni, int telefono) {//Se registra nuevo cliente con String name, String surname, String dni, int telefono.
+/**
+ 	* @param name   El nombre del usuario
+* @param surname   El nombre del usuario
+* @param dni    El dni del usuario
+* @param telefono   El telefono del usuario
+* @return Un string que si existe el usuario
+*/
+	public String nuevoClient(String name, String surname, String dni, int telefono) {
 		if(listausuarios.containsKey(dni)) {
 			return "Ya existe ese usuario";
 		}
 		listausuarios.put(dni,new Usuario(name,surname,dni,telefono));
 		return "Usuario Añadido";
 	}
-	public String registerProduct(int id,String name, float precio, int cant) {//Se registra nuevo producto con int id,String name, int precio, int cant
+	/**
+	* @param id   El nombre del usuario
+	* @param name   El nombre del usuario
+	* @param precio    El dni del usuario
+	* @param cant   El telefono del usuario
+	* @return Un string que si existe el producto
+	*/
+	public String registerProduct(int id,String name, float precio, int cant) {
 		if(!almacen.encontrarProduct(id)) {
 			almacen.registerNewProduct(name, id, precio, cant);
 			return "Producto Añadido";
 		}
 		return "Ya existe ese producto";
 	}
-	public String añadirProduct(int id, int cant) {//Se añaden producto con int id, int cant
+	/**
+	* @param id    El identificador del producto
+	* @param cant   La cantidad introducida en producto
+	* @return Un string que muestra si existe el producto
+	*/
+	public String añadirProduct(int id, int cant) {
 		if(almacen.encontrarProduct(id)) {
 			almacen.addcantProduct(id, cant);
 			return "Cantidad de producto añadida";
 		}
 		return "Producto no existe";
 	}
-	public String añadirPedido(String dni,int idProducto ,int cantidad){//Se ve si existe usuario y si existe añade un pedido String dni,int idProducto ,int cantidad
+	/**
+	* @param idProducto   El identificador de producto
+	* @param dni    El dni del usuario
+	* @param cantidad   La cantidad selecionada de producto
+	* @return Un string que nos informa si se puede añadir
+	*/
+	public String añadirPedido(String dni,int idProducto ,int cantidad){
 		float precio = verPrecio(idProducto);
 		int idLista = ListaPedidos.size();
 		if((listausuarios.containsKey(dni))&&(almacen.hayCantidad(idProducto,cantidad))) {
@@ -47,8 +72,12 @@ List<Pedido> ListaPedidos = new ArrayList<>();
 		}
 		return "No se ha podido añadir";
 	}
-	public String pasarPedidoAFactura(String dni) {//Se sacan los pedidos por dni y se almacenan a ListaFactura
-		for (Pedido Unpedido  : ListaPedidos) {//int idFactura, String dni, String estadoPago,float subtotal, float precio,float cantidad
+	/**
+	* @param dni Buscamos el dni del usuario con pedidos
+	* @return Un string que nos informa si hay coincidencias
+	*/
+	public String pasarPedidoAFactura(String dni) {
+		for (Pedido Unpedido  : ListaPedidos) {
 		    if ((Unpedido.getDni().equals(dni))&&(!Unpedido.getTerminado())){
 		    		ListaFacturas.add( new Factura(sacarfecha(), dni, facturaTerminado(Unpedido.getDni()), 0,Unpedido.getCantidad(), Unpedido.getPrecio()));
 		    		Unpedido.setTerminado();
@@ -57,7 +86,11 @@ List<Pedido> ListaPedidos = new ArrayList<>();
 		}
 		return "No se encontro pedidos asociados al DNI";
 	}
-	public String mostrarFactura(int idFactura) {//Se una Factura por idFactura
+	/**
+	* @param idFactura   mostramos factura por id
+	* @return Pasa String con la factura o un Not found
+	*/
+	public String mostrarFactura(int idFactura) {
 		if(!existFactura(idFactura)){
 			return "Not found";
 		}
@@ -73,9 +106,12 @@ List<Pedido> ListaPedidos = new ArrayList<>();
 		buscarEnFactura(idFactura)+"\n"+
 		"|                                                                             |\n"+
 		"+-----------------------------------------------------------------------------+\n";
-	
 	}
-	public String mostrarHistorial(String dni) {//Se sacan los id de Facturas que coincidan por dni.
+	/**
+	* @param dni    El dni del usuario
+	* @return Un string que muestra los Id de facturas que coincida con el dni
+	*/
+	public String mostrarHistorial(String dni) {
 		if(listausuarios.containsKey(dni)) {
 			for (Factura UnaFactura : ListaFacturas) {
 			    if (UnaFactura.getDni().equals(dni)) {
@@ -96,6 +132,7 @@ List<Pedido> ListaPedidos = new ArrayList<>();
 		}
 		return "PAGADO";
 	}
+	
 	public String facturaEstado(int id) {  //Se comprueba que existe el pedido en la lista por coincidendia con un atributo.
 		for (Factura UnaFactura  : ListaFacturas) {
 		    if (UnaFactura.getIdFactura()==id) {
@@ -108,6 +145,7 @@ List<Pedido> ListaPedidos = new ArrayList<>();
 		}
 		return "null";
 	}
+	
 	public boolean existFactura(int idFactura) {  //Se comprueba que existe el pedido en la lista por coincidendia con un atributo.
 		for (Factura UnaFactura  : ListaFacturas) {
 		    if (UnaFactura.getIdFactura()==idFactura) {
@@ -116,6 +154,7 @@ List<Pedido> ListaPedidos = new ArrayList<>();
 		}
 		return false;
 	}
+	
 	public boolean existPedido(String dni) {  //Se comprueba que existe el pedido en la lista por coincidendia con un atributo.
 		for (Pedido UnPedido  : ListaPedidos) {
 		    if (UnPedido.getDni()==dni) {
@@ -124,16 +163,21 @@ List<Pedido> ListaPedidos = new ArrayList<>();
 		}
 		return false;
 	}
+	
 	//--------------------------------Busqueda de objetos----------------------------------------------------------
+	
 	public String verProductos() {
 		return almacen.verProductos();
 	}
+	
 	public float verPrecio(int idProducto) {
 		return almacen.verPrecio(idProducto);
 	}
+	
 	public String verNombre(int idProducto) {
 		return almacen.verNombre(idProducto);
 	}
+	
 	public String BuscarNombrePerdido(float cantidad,float descuento,String dni,int id ) {
 		String cadena= "";
 		for (Pedido UnPedido  : ListaPedidos) {
@@ -143,15 +187,16 @@ List<Pedido> ListaPedidos = new ArrayList<>();
 		}
 		return cadena;
 	}
+	
 	public String listarPedidos(int id) {
 		for (Factura UnaFactura : ListaFacturas) {
-		    if (UnaFactura.getIdFactura()==id) {
-		    	
+		    if (UnaFactura.getIdFactura()==id) {    	
 		    	return BuscarNombrePerdido(UnaFactura.getCantidad(),UnaFactura.getDescuento(),UnaFactura.getDni(),id);
 		    }
 		}
 		return null;
 	}
+	
 	public String mostrarFacturaUsuario(int id) {
 		for (Factura UnaFactura : ListaFacturas) {
 		    if (UnaFactura.getIdFactura()==id) {
@@ -160,10 +205,11 @@ List<Pedido> ListaPedidos = new ArrayList<>();
 		}
 		return null;
 	}
+	
 	public String mostrarDATOSFacturaUsuario(int id) {
 		for (Factura UnaFactura : ListaFacturas) {
 		    if (UnaFactura.getIdFactura()==id) {
-		        return "|"+listausuarios.get(UnaFactura.getDni());
+		        return "|"+listausuarios.get(UnaFactura.getDni()).toString();
 		    }
 		}
 		return null;
@@ -179,6 +225,7 @@ List<Pedido> ListaPedidos = new ArrayList<>();
 		}
 		return cadena;
 	}
+	
 //------------------------------------Numero Factura-------------------------------------------------------
 	public int sacarfecha() {
         int mes = fecha.get(Calendar.MONTH);
